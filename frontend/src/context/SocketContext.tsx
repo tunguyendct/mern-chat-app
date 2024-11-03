@@ -7,15 +7,11 @@ import {
 } from 'react';
 import { useAuthContext } from './AuthContext';
 import io, { Socket } from 'socket.io-client';
-
-interface OnlineUser {
-  _id: string;
-  username: string;
-}
+import { User } from '../types/user.type';
 
 interface SocketContextType {
   socket: Socket | null;
-  onlineUsers: OnlineUser[];
+  onlineUsers: User['_id'][];
 }
 
 interface SocketContextProviderType {
@@ -40,7 +36,7 @@ export const SocketContextProvider = ({
   children,
 }: SocketContextProviderType) => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([]);
+  const [onlineUsers, setOnlineUsers] = useState<User['_id'][]>([]);
   const { authUser } = useAuthContext();
 
   useEffect(() => {
@@ -54,7 +50,7 @@ export const SocketContextProvider = ({
       setSocket(newSocket);
 
       // socket.on() is used to listen to the events. can be used both on client and server side
-      newSocket.on('getOnlineUsers', (users: OnlineUser[]) => {
+      newSocket.on('getOnlineUsers', (users: User['_id'][]) => {
         setOnlineUsers(users);
       });
 

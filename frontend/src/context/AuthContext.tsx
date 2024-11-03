@@ -1,8 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-
-interface AuthUser {
-  _id: string;
-}
+import { AuthUser } from '../types/auth.type';
 
 export interface AuthContextType {
   authUser: AuthUser | null;

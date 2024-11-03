@@ -1,12 +1,10 @@
 import { create } from 'zustand';
-
-interface Message {
-  _id: string;
-}
+import { Conversation } from '../types/conversation.type';
+import { Message } from '../types/message.type';
 
 interface ConversationProps {
-  selectedConversation: string | null;
-  setSelectedConversation: (selectedConversation: string | null) => void;
+  selectedConversation: Conversation | null;
+  setSelectedConversation: (selectedConversation: Conversation | null) => void;
   messages: Message[];
   setMessages: (messages: Message[]) => void;
 }
